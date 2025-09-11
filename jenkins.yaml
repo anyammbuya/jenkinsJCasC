@@ -1,0 +1,12 @@
+unclassified:
+  location:
+    url: "http://localhost:8080/"
+tool:
+  maven:
+    installations:
+      - name: "Maven-3.9.11"
+        home: "/opt/maven"
+  git:
+    installations:
+      - name: "Git"
+        home: "git"
