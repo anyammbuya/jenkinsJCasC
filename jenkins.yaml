@@ -10,3 +10,7 @@ tool:
     installations:
       - name: "Git"
         home: "git"
+  jdk:
+    installations:
+      - name: "Java-21"
+        home: "/usr/lib/jvm/java-21-amazon-corretto.x86_64"
