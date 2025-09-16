@@ -26,4 +26,4 @@ jobs:
             --targets "Key=instanceIds,Values=${{ secrets.EC2_INSTANCE_ID }}" \
             --document-name "AWS-RunShellScript" \
             --comment "Update Jenkins plugins after plugins.txt change" \
-            --parameters 'commands=["/home/ec2-user/update-jenkins-plugins.sh"]'
+            --parameters 'commands=["/etc/jenkins/update-jenkins-plugins.sh"]'
