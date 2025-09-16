@@ -1,0 +1,29 @@
+name: Update Jenkins Plugins on EC2
+
+on:
+  push:
+    paths:
+      - 'plugins.txt'   # only run when plugins.txt changes
+  workflow_dispatch:    # also allow manual run
+
+jobs:
+  update-plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Send SSM command to update plugins
+        run: |
+          aws ssm send-command \
+            --targets "Key=instanceIds,Values=${{ secrets.EC2_INSTANCE_ID }}" \
+            --document-name "AWS-RunShellScript" \
+            --comment "Update Jenkins plugins after plugins.txt change" \
+            --parameters 'commands=["/home/ec2-user/update-jenkins-plugins.sh"]'
