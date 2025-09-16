@@ -1,3 +1,4 @@
 configuration-as-code
 git
 maven-plugin
+deploy
